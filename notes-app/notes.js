@@ -7,9 +7,24 @@ const addNote = (title, body) => {
   // use .find instead of .filter, filter will go through every single one even there is a match
   const duplicateNote = notes.find((note) => note.title === title);
 
+  // DEBUGGING - instead of node app.js, add the option 'inspect' to make debugger working
+  // e.g. node inspect app.js add --title="c" --body="t"
+  // debugger;
+
+  // open chrome://inspect
+  /*
+    < Debugger attached.
+    < duplicated
+    < Waiting for the debugger to disconnect...
+    debug>
+
+    Could use 'restart' to restart the debugger after closed the console
+  */
+
   if (!duplicateNote) {
     notes.push({title, body})
     saveNotes(notes); 
+    console.log(chalk.green.inverse("duplicated"));
   } else {
     console.log("duplicated");
   }
