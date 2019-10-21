@@ -1,6 +1,7 @@
 const request = require('request');
 const { DARK_SKY_API_KEY, MAP_BOX_API_KEY } = require('./weather.config');
 const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 // const url = `https://api.darksky.net/forecast/${DARK_SKY_API_KEY}/37.8267,-122.4233?units=si`;
 
@@ -35,4 +36,9 @@ const geocode = require('./utils/geocode');
 geocode('Boston', (error, data) => {
   console.log('Error', error);
   console.log('data', data);
+
+  forecast(-75.7088, 44.1545, (error, data) => {
+    console.log('Error', error);
+    console.log('Data', data);
+  });
 });
