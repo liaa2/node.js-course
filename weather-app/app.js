@@ -1,5 +1,3 @@
-const request = require('request');
-const { DARK_SKY_API_KEY, MAP_BOX_API_KEY } = require('./weather.config');
 const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 
@@ -31,14 +29,26 @@ const forecast = require('./utils/forecast');
 //   }
 // });
 
+// console.log(process.argv);
+const address = process.argv[2];
 
+if(!address) {
+  console.log('Please provide address');
+} else {
+  geocode(address, (error, {lat, long, location}) => {
+    if (error) {
+      return console.log(error);
+    }
 
-geocode('Boston', (error, data) => {
-  console.log('Error', error);
-  console.log('data', data);
+    forecast(lat, long, (error, forecastData) => {
+      if (error) {
+        return console.log(error);
+      }
 
-  forecast(-75.7088, 44.1545, (error, data) => {
-    console.log('Error', error);
-    console.log('Data', data);
+      console.log(location);
+      console.log(forecastData);
+    });
   });
-});
+}
+
+
