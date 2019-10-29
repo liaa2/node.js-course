@@ -22,7 +22,6 @@ const request = https.request(url, (response) => {
 
 request.on('error', (error) => {
   console.log("An error", error);
-  
 })
 
 request.end();
